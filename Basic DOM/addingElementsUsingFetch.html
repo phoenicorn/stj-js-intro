@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adding Elements</title>
+  </head>
+  <body>
+    <button onclick="populate()">Populate Names</button>
+
+    <script>
+      function alertDetails(e) {
+        alert(e.target.innerHTML);
+      }
+
+      function deleteElement(e) {
+        parent = e.target.parentNode;
+        parent.remove();
+      }
+
+      async function getData() {
+        // let response = await fetch(
+        //   "https://jsonplaceholder.typicode.com/users"
+        // );
+        let response = await fetch("http://localhost:8080");
+        const users = await response.json();
+        return users;
+      }
+
+      async function populate(e) {
+        const users = await getData();
+        console.log(users[0]);
+        let container = document.createElement("div");
+
+        for (let i = 0; i < users.length; i++) {
+          let root = document.createElement("div");
+          let name = document.createElement("h1");
+          let phone = document.createElement("h4");
+          let button = document.createElement("button");
+          let company = document.createElement("p");
+
+          name.innerHTML = users[i].name;
+          phone.innerHTML = users[i].phone;
+          company.innerHTML = users[i].company.name;
+          button.innerHTML = "Delete";
+          button.addEventListener("click", deleteElement);
+
+          root.appendChild(name);
+          root.appendChild(phone);
+          root.appendChild(company);
+          root.appendChild(button);
+
+          root.id = users[i].name;
+
+          name.addEventListener("click", alertDetails);
+
+          container.appendChild(root);
+        }
+
+        document.body.appendChild(container);
+        console.log(this);
+      }
+    </script>
+  </body>
+</html>

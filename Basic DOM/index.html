@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Intro</title>
+  </head>
+  <body>
+    <h1 id="heading">JS Intro</h1>
+
+    <button onclick="displayName()">Click here</button>
+
+    <script>
+      function displayName(e) {
+        console.log(e);
+        let name = prompt("Enter your name");
+
+        document.getElementById("heading").innerHTML = "Hello " + name;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adding Elements</title>
+  </head>
+  <body>
+    <button onclick="populate()">Populate Names</button>
+
+    <script>
+      function alertDetails(e) {
+        alert(e.target.innerHTML);
+      }
+
+      function deleteElement(e) {
+        parent = e.target.parentNode;
+        parent.remove();
+      }
+
+      function populate() {
+        const obj = [
+          {
+            name: "Praveen",
+            age: 21,
+            company: "PhospheneAI",
+          },
+          {
+            name: "Vinod",
+            age: 22,
+            company: "VueData",
+          },
+          {
+            name: "Leander",
+            age: 24,
+            company: "Zoho",
+          },
+        ];
+
+        let container = document.createElement("div");
+
+        for (let i = 0; i < obj.length; i++) {
+          let root = document.createElement("div");
+          let name = document.createElement("h1");
+          let age = document.createElement("h4");
+          let button = document.createElement("button");
+
+          let company = document.createElement("p");
+
+          name.innerHTML = obj[i].name;
+          age.innerHTML = obj[i].age;
+          company.innerHTML = obj[i].company;
+          button.innerHTML = "Delete";
+          button.addEventListener("click", deleteElement);
+
+          root.appendChild(name);
+          root.appendChild(age);
+          root.appendChild(company);
+          root.appendChild(button);
+
+          root.id = obj[i].name;
+
+          name.addEventListener("click", alertDetails);
+
+          container.appendChild(root);
+        }
+
+        document.body.appendChild(container);
+      }
+    </script>
+  </body>
+</html>
